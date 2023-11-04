@@ -54,19 +54,6 @@ int main()
         }
     }
     cout << string_input[minimum_index].first;
-=======
-#include <iostream>
-#include <vector>
-
-
-using namespace std;
-
-int main()
-{
-    int a=1, b=2, c=3, d=4;
-    printf("%d %d %d %d", a ,b ,c ,d);
-
->>>>>>> ca76ac980ef501ad68783bf83e8cc1401467abbe
 }
 
 
