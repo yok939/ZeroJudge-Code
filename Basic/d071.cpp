@@ -16,7 +16,7 @@ int main()
             printf("%s\n", "a leap year");
         }
         else{
-            printf("%s'n", "a normal year");
+            printf("%s\n", "a normal year");
         }
     }
     
