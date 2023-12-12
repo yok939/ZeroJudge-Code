@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool ismatch(string target, char map[75][75], int x_start, int y_start, int x_add, int y_add){
+bool ismatch(string target, char map[80][80], int x_start, int y_start, int x_add, int y_add){
     int x=x_start, y=y_start;
     for(int i=0;i<target.length();i++){
         if(map[y][x]==target[i]){
@@ -19,9 +19,9 @@ bool ismatch(string target, char map[75][75], int x_start, int y_start, int x_ad
 
 int main(){
     int r, c, top_x=0, top_y=0, bottom_x=0, bottom_y=0;
-    int possible_top_x[5630], possible_top_y[5630], possible_bottom_x[5630], possible_bottom_y[5630], total=0, same=1, min=INT_MAX, min_i;
+    int possible_top_x[6400], possible_top_y[6400], possible_bottom_x[6400], possible_bottom_y[6400], total=0, same=1, min=INT_MAX, min_i;
     string s;
-    char map[75][75];
+    char map[80][80];
     cin >> r >> c;
     for(int i=0;i<r;i++)for(int j=0;j<c;j++)cin >> map[i][j];
     for(int i=0;i<r;i++)for(int j=0;j<c;j++)if(map[i][j]>=65&&map[i][j]<=90)map[i][j]=map[i][j]-'A'+'a';

@@ -8,6 +8,7 @@ int main()
     scanf("%i", &amount);
     for(int i=0;i<amount;i++){
         scanf("%i", &input);
+        printf("Case %d: ", i+1);
         if(input%400!=0&&input%100==0){
             printf("%s\n", "a normal year");
         }
@@ -24,3 +25,4 @@ int main()
 
     return 0;
 }
+
