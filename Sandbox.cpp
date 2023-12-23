@@ -1,27 +1,13 @@
-#include <cinttypes>
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{  
-    int a;
-    cin >> a;
-  int b[10], temp=a;
-  for(int i=0;i<10;i++){
-    b[i]=0;
+int main(){
+  vector<int> test(50, 0);
+  int left=0;
+  for(int i=0;i<test.size();i++){
+    cin >> test[i];
   }
-  while(temp){
-    b[(temp%10)]++;
-    temp/=10;
-  }
-  for(int i=9;i>=0;i--){
-    if(b[i]>0){
-      while(b[i]){
-        cout << i;
-        b[i]--;
-      }
-    }
-  }
-  return 0;
+  sort(test.begin(),test.end());
+  
+
 }
