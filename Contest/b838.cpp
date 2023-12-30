@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+
 int main(){
     int t;cin >> t;
     while(t--){
@@ -20,4 +22,5 @@ int main(){
         if(st.empty()) cout<<ans<<'\n';
 		else cout<<"0\n";
     }
+    return 0;
 }

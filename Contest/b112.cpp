@@ -25,5 +25,5 @@ int main(){
         }
         cout << big_gcd << endl;
     }
-    
+    return 0;
 }

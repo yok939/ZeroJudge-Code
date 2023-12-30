@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+
 int main(){
     int n, m;
     char c;
@@ -21,4 +23,5 @@ int main(){
         }
         cout << endl;
     }
+    return 0;
 }

@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+
 int main(){
     int n, k, value0=0, value1=0;
     cin >> n >> k;
@@ -17,4 +19,5 @@ int main(){
         }
     }
     cout << min(value0, value1) << ' ' << max(value0, value1);
+    return 0;
 }

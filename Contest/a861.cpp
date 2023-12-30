@@ -7,4 +7,5 @@ int main(){
     while(cin >> h >> w){
         cout << (h+w)*2 << endl;
     } 
+    return 0;
 }
