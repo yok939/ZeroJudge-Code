@@ -3,9 +3,9 @@
 
 
 using namespace std;
-
+    
 int main()
-{
+{  
     long long n, m, addup=0, havenum[400];
     bool out=false;
     cin >> n >> m;
