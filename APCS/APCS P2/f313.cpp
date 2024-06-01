@@ -1,50 +1,50 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int add_x[4]={1, -1, 0, 0};
-int add_y[4]={0, 0, 1, -1};
+int r, c, k, m, ans_min = INT_MAX, ans_max = INT_MIN;
+int upd[55][55], now[55][55];
+int dir[4][2] = {{0, -1}, {0, 1}, {1, 0}, {-1, 0}};
+
+bool in_range(int x, int y, int tarx, int tary){
+    return x >= 1 && x <= tarx && y >= 1 && y <= tary;
+}
 
 int main(){
-    int r, c, k, m, citizen_min=INT_MAX, citizen_max=INT_MIN;
+    memset(upd, 0, sizeof(upd));
     cin >> r >> c >> k >> m;
-    vector<vector<int>> citizen(r, vector<int>(c, 0));
-    vector<vector<int>> add_up(r, vector<int>(c, 0));
-    for(int i=0;i<r;i++){
-        for(int j=0;j<c;j++){
-            cin >> citizen[i][j];
+    for(int i = 1; i <= r; i++){
+        for(int j = 1; j <= c; j++){
+            cin >> now[i][j];
         }
     }
     while(m--){
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
-                add_up[i][j]=0;
-            }
-        }
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
-                for(int d=0;d<4;d++){
-                    if(i+add_y[d]>=0&&i+add_y[d]<r&&j+add_x[d]>=0&&j+add_x[d]<c&&citizen[i+add_y[d]][j+add_x[d]]!=-1&&citizen[i][j]!=-1){
-                        add_up[i][j]-=citizen[i][j]/k;
-                        add_up[i+add_y[d]][j+add_x[d]]+=citizen[i][j]/k;
+        for(int i = 1; i <= r; i++){
+            for(int j = 1; j <= c; j++){
+                if(now[i][j] == -1) continue;
+                for(int p = 0; p < 4; p++){
+                    int new_x = i + dir[p][0], new_y = j + dir[p][1];
+                    if(in_range(new_x, new_y, r, c) && now[new_x][new_y] != -1){
+                        upd[new_x][new_y] += now[i][j] / k;
+                        upd[i][j] -= now[i][j] / k;
                     }
                 }
             }
         }
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
-                citizen[i][j]+=add_up[i][j];
+        for(int i = 1; i <= r; i++){
+            for(int j = 1; j <= c; j++){
+                now[i][j] += upd[i][j];
+                upd[i][j] = 0;
             }
         }
     }
-    for(int i=0;i<r;i++){
-        for(int j=0;j<c;j++){
-            if(citizen[i][j]!=-1){
-                citizen_min=min(citizen_min, citizen[i][j]);
-                citizen_max=max(citizen_max, citizen[i][j]);
+    for(int i = 1; i <= r; i++){
+        for(int j = 1; j <= c; j++){
+            if(now[i][j] != -1){
+                ans_min = min(ans_min, now[i][j]);
+                ans_max = max(ans_max, now[i][j]);
             }
         }
     }
-    printf("%d\n%d", citizen_min, citizen_max);
+    cout << ans_min << '\n' << ans_max << '\n';
     return 0;
 }
