@@ -1,45 +1,31 @@
 #include <bits/stdc++.h>
-
+#define LL long long 
 using namespace std;
-#define LL long long
-LL n, k, d;
-vector<LL> P(50005, 0);
-vector<LL> pre(50005, 0);
-vector<LL> rev(50005, 0);
 
-LL rec(LL left, LL right, LL level){
-    if(level==k||right-left<2){
-        return 0;
-    }
-    LL delta=0;
-    pre[left]=0;
-    for(int i=left+1;i<=right;i++){
-        delta+=P[i-1];
-        pre[i]=pre[i-1]+delta;
-    }
-    delta=0;
-    rev[right]=0;
-    for(int i=right-1;i>=left;i--){
-        delta+=P[i+1];
-        rev[i]=rev[i+1]+delta;
-    }
-    LL mn=LONG_LONG_MAX;
-    LL idx=0;
-    for(int i=left+1;i<=right-1;i++){
-        if(abs(pre[i]-rev[i])<mn){
-            mn=abs(pre[i]-rev[i]);
-            idx=i;
+LL n, k, p[50005], psum[50005], ans = 0;
+
+LL rec(int L, int R, int lvl){
+    if(lvl == k || (R - L < 3)) return 0;
+    LL best = INT_MAX, dis = 0, pnt = L + 1, ppsum = psum[R] - psum[L];
+    for(int i = L; i < R; i++) dis += (i - pnt) * p[i];
+    best = abs(dis);
+    for(int i = L + 2; i < R - 1; i++){
+        dis -= ppsum;
+        if(abs(dis) < best){
+            pnt = i;
+            best = abs(dis);
         }
-        
     }
-    return P[idx]+rec(left, idx-1, level+1)+rec(idx+1, right, level+1);
-    
+    return rec(L, pnt, lvl + 1) + rec(pnt + 1, R, lvl + 1) + p[pnt];
 }
 
-
 int main(){
-    scanf("%d%d", &n, &k);
-    for(int i=0;i<n;i++) scanf("%d", &P[i]);
-    printf("%lld", rec(0, n-1, 0));
+    memset(psum, 0, sizeof(psum));
+    cin >> n >> k;
+    for(int i = 0; i < n; i++){
+        cin >> p[i];
+        psum[i + 1] = psum[i] + p[i];
+    }
+    cout << rec(0, n, 0) << '\n';
     return 0;
 }
