@@ -1,27 +1,16 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int main()
-{
-    string s;
-    string buffer;
-    cin >> s;
-    bool rev = false;
-    for(char c : s){
-        if(c == '+' || c == '-') {
-			reverse(buffer.begin(), buffer.end());
-			cout << buffer;
-			buffer.clear();
-			rev = (c == '-');
-		} else {
-			if(rev) {
-				buffer += c;
-			} else {
-				cout << c;
-			}
-		}
-    }
-    reverse(buffer.begin(), buffer.end());
-	cout << buffer << "\n";
+string s;
+
+int main(){
+	cin >> s;
+	int len = s.length();
+	for(int i = 0; i < len; i++){
+		if(s[i] == '-') reverse(next(s.begin(), i + 1), min(find(next(s.begin(), i + 1), s.end(), '+'), 
+															find(next(s.begin(), i + 1), s.end(), '-')));
+		else if(s[i] != '+' && s[i] != '-') cout << s[i];
+	}
+	cout << '\n';
+	return 0;
 }
