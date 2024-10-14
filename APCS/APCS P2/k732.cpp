@@ -1,38 +1,29 @@
 #include <bits/stdc++.h>
-
+#define F first
+#define S second
+#define LL long long
 using namespace std;
 
+LL n, m, gr[55][55];
+vector<pair<int, int>> ans;
 int main(){
-    int n, m, total_ma=0;
-    cin >> n >> m;
-    vector<vector<int>> a(n, vector<int>(m, 0));
-    vector<int> ma_x;
-    vector<int> ma_y;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            cin >> a[i][j];
-        }
-    }
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            int total=0;
-            for(int k=0;k<n;k++){
-                for(int p=0;p<m;p++){
-                    if(abs(i-k)+abs(j-p)<=a[i][j]){
-                        total+=a[k][p];
-                    }
-                }
-            }
-            if(total%10==a[i][j]){
-                total_ma++;
-                ma_x.push_back(j);
-                ma_y.push_back(i);
-            }
-        }
-    }
-    cout << total_ma;
-    for(int i=0;i<total_ma;i++){
-        printf("\n%d %d", ma_y[i], ma_x[i]);
-    }
-    return 0;
+	cin >> n >> m;
+	for(int i = 1; i <= n; i++){
+		for(int j = 1; j <= m; j++){
+			cin >> gr[i][j];
+		}
+	}
+	for(int i = 1; i <= n; i++){
+		for(int j = 1; j <= m; j++){
+			LL x = gr[i][j], tmp = 0;
+			for(int ii = max(1LL, i - x); ii <= min(n, i + x); ii++){
+				for(int jj = max(1LL, j - x); jj <= min(m, j + x); jj++){
+					if(abs(i - ii) + abs(j - jj) <= x) tmp += gr[ii][jj];	
+				}
+			}
+			if(tmp % 10 == x) ans.push_back({i, j});
+		}
+	}
+	cout << ans.size() << '\n';;
+	for(auto i : ans) cout << i.F - 1 << ' ' << i.S - 1 << '\n';
 }

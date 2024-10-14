@@ -1,42 +1,19 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int main()
-{
-    int n, best_case=INT_MAX, worst_case=INT_MIN;
-    cin >> n;
-    vector<int> s(n);
-    for(int i=0;i<n;i++){
-        cin >> s[i];
-    }
-    for(int i=0;i<=100;i++){
-        for(int j=0;j<n;j++){
-            if(s[j]==i){
-                cout << s[j] << ' ';
-            }
-            if(s[j]>=60&&s[j]<best_case){
-                best_case=s[j];
-            }
-            else if(s[j]<60&&s[j]>worst_case){
-                worst_case=s[j];
-            }
-        }
-    }
-    cout << endl;
-    if(worst_case==INT_MIN){
-        cout << "best case";
-    }
-    else{
-        cout << worst_case;
-    }
-    cout << endl;
-    if(best_case==INT_MAX){
-        cout << "worst case";
-    }
-    else{
-        cout << best_case;
-    }
-
-    return 0;
+int n, a = INT_MIN, b = INT_MAX;
+int main(){
+	cin >> n;
+	vector<int> c(n);
+	for(int i = 0; i < n; i++){
+		cin >> c[i];
+		if(c[i] < 60) a = max(c[i], a);
+		else b = min(c[i], b);
+	}
+	sort(c.begin(), c.end());
+	for(int i = 0; i < n; i++) cout << c[i] << ' ';
+	cout << '\n';
+	cout << (a == INT_MIN ? "best case" : to_string(a)) << '\n';
+	cout << (b == INT_MAX ? "worst case" : to_string(b)) << '\n';
 }
+
